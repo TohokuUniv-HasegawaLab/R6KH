@@ -1,0 +1,76 @@
+settings:
+  statistics_params: # define simulation area
+    x:
+      min: 0
+      max: 550
+    y:
+      min: 0
+      max: 200
+  bs_batch_change:
+    change: True # change the bandwidth of base stations all at once
+    1: # donor
+      coverage: 200 # radius of possible communication range
+      Wa: 10000000000 # access link bandwidth allocated to this base station
+      Wb: 10000000000 # access link bandwidth allocated to this base station
+    2: # node
+      coverage: 200
+      Wa: 10000000000
+      Wb: 10000000000
+slices: # define slices specifications
+  S1: # a slice named 'S1'
+    client_weight: 1 # how many ratio of UEs will be accumulated to this slice
+    usage_pattern: # define the requesting bandwidth of each UEs
+      distribution: randint
+      params:
+        - 80 # minimum bandwidth of requesting bandwidth for each UEs
+        - 80 # maximum bandwidth of requesting bandwidth for each UEs
+base_stations: # define base stations' specs. type1 = donor(id = 100~), type2 = node(id = 1~)
+  - id: 100 # base station's id
+    type: 1 # base station's type(donor or node)
+    coverage: 230
+    Wa: 2000000
+    Wb: 3000000
+    x: 460 # x-coordinate of the base station
+    y: 100 # y-coordinate of the base station
+  - id: 1
+    type: 2
+    coverage: 200
+    Wa: 2000000
+    Wb: 3000000
+    x: 100
+    y: 100
+  - id: 2
+    type: 2
+    coverage: 250
+    Wa: 2000000
+    Wb: 3000000
+    x: 280
+    y: 100
+mobility_patterns:
+  walk:
+    params:
+      min: 30
+      max: 30
+    client_weight: 1
+clients: # define the specs of UEs
+  location: # define the location of UEs
+    0: # a group named '0'
+      client_weight: 1 # how many ratio of UEs will be classified as this group
+      x: # x-coordinate distribution 
+        params:
+          min: 0
+          max: 550
+      y: # y-coordinate distribution
+        params:
+          min: 0
+          max: 200
+    1:
+      client_weight: 0
+      x:
+        params:
+          min: 0
+          max: 200
+      y:
+        params:
+          min: 0
+          max: 100
